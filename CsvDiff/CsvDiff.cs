@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CsvDiff.Tests;
 
 namespace CsvDiff
 {
@@ -8,15 +11,29 @@ namespace CsvDiff
         {
             return new DiffResult(left == right);
         }
-    }
 
-    public class DiffResult
-    {
-        public DiffResult(bool match)
+        public DiffResult Diff(string left, string right, DiffOptions diffOptions)
         {
-            Match = match;
+            if (diffOptions.AllowWhitespaceTrimming)
+            {
+                left = Trim(left);
+                right = Trim(right);
+            }
+
+            return Diff(left, right);
         }
 
-        public bool Match { get; }
+        private string Trim(string input)
+        {
+            var rows = input.Split(new[] {@"\r\n"}, StringSplitOptions.None);
+            IList<string> trimmedRows = new List<string>(rows.Length);
+            foreach (var row in rows)
+            {
+                var cols = row.Split(new []{','}, StringSplitOptions.None);
+                trimmedRows.Add(string.Join(",", cols.Select(c => c.Trim())));
+            }
+
+            return string.Join("\r\n", trimmedRows);
+        }
     }
 }
