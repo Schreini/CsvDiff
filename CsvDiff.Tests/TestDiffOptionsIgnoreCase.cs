@@ -2,7 +2,7 @@
 
 namespace CsvDiff.Tests
 {
-    public class TestDiffOptionsCaseInsensitive
+    public class TestDiffOptionsIgnoreCase
     {
         [Fact]
         public void DiffDifferentCasingShouldFail()
@@ -21,12 +21,12 @@ namespace CsvDiff.Tests
         }
 
         [Fact]
-        public void DiffOptionCaseInsensitiveFalse()
+        public void DiffOptionIgnoreCaseFalse()
         {
             //Arrange
             var left = @"Col1,Col2\r\nval1,Val2";
             var right = @"Col1,Col2\r\nVal1,val2";
-            var diffOptions = new DiffOptions {CaseInsensitive = false};
+            var diffOptions = new DiffOptions {IgnoreCase = false};
 
             var target = new CsvDiff();
 
@@ -38,29 +38,12 @@ namespace CsvDiff.Tests
         }
 
         [Fact]
-        public void DiffOptionCaseInsensitiveTrue()
+        public void DiffOptionIgnoreCaseTrue()
         {
             //Arrange
             var left = @"Col1,Col2\r\nval1,Val2";
             var right = @"Col1,Col2\r\nVal1,val2";
-            var diffOptions = new DiffOptions {CaseInsensitive = true};
-
-            var target = new CsvDiff();
-
-            //act
-            var actual = target.Diff(left, right, diffOptions);
-
-            //assert
-            Assert.True(actual.Match);
-        }
-
-        [Fact]
-        public void DiffTrimWhitespaceOptionTrueWorksWithMultipleColumns()
-        {
-            //Arrange
-            var left = @"Col1,Col2\r\n Val1 ,Val2";
-            var right = @"Col1,Col2\r\nVal1, Val2 ";
-            var diffOptions = new DiffOptions {AllowWhitespaceTrimming = true};
+            var diffOptions = new DiffOptions {IgnoreCase = true};
 
             var target = new CsvDiff();
 

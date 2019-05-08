@@ -13,13 +13,13 @@ namespace CsvDiff
 
         public DiffResult Diff(string left, string right, DiffOptions diffOptions)
         {
-            if (diffOptions.AllowWhitespaceTrimming)
+            if (diffOptions.TrimWhitespace)
             {
                 left = Trim(left);
                 right = Trim(right);
             }
 
-            if (diffOptions.CaseInsensitive)
+            if (diffOptions.IgnoreCase)
             {
                 left = left.ToUpperInvariant();
                 right = right.ToUpperInvariant();
