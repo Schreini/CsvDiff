@@ -19,6 +19,12 @@ namespace CsvDiff
                 right = Trim(right);
             }
 
+            if (diffOptions.CaseInsensitive)
+            {
+                left = left.ToUpperInvariant();
+                right = right.ToUpperInvariant();
+            }
+
             return Diff(left, right);
         }
 

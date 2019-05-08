@@ -103,7 +103,6 @@ namespace CsvDiff.Tests
             Assert.False(actual.Match);
         }
 
-
         [Fact]
         public void DiffTrimWhitespaceOptionTrueWorksWithMultipleColumns()
         {
@@ -120,6 +119,59 @@ namespace CsvDiff.Tests
             //assert
             Assert.True(actual.Match);
         }
+
+        [Fact]
+        public void DiffOptionCaseInsensitiveTrue()
+        {
+            //Arrange
+            string left = @"Col1,Col2\r\nval1,Val2";
+            string right = @"Col1,Col2\r\nVal1,val2";
+            var diffOptions = new DiffOptions() { CaseInsensitive = true };
+
+            var target = new CsvDiff();
+
+            //act
+            var actual = target.Diff(left, right, diffOptions);
+
+            //assert
+            Assert.True(actual.Match);
+        }
+
+        [Fact]
+        public void DiffOptionCaseInsensitiveFalse()
+        {
+            //Arrange
+            string left = @"Col1,Col2\r\nval1,Val2";
+            string right = @"Col1,Col2\r\nVal1,val2";
+            var diffOptions = new DiffOptions() { CaseInsensitive = false };
+
+            var target = new CsvDiff();
+
+            //act
+            var actual = target.Diff(left, right, diffOptions);
+
+            //assert
+            Assert.False(actual.Match);
+        }
+
+        [Fact]
+        public void DiffDifferentCasingShouldFail()
+        {
+            //Arrange
+            string left = @"Col1,Col2\r\nval1,Val2";
+            string right = @"Col1,Col2\r\nVal1,val2";
+
+            var target = new CsvDiff();
+
+            //act
+            var actual = target.Diff(left, right);
+
+            //assert
+            Assert.False(actual.Match);
+        }
+
+
+
 
     }
 }
