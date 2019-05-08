@@ -1,4 +1,4 @@
-namespace CsvDiff.Tests
+namespace CsvDiff
 {
     public class DiffOptions    
     {
