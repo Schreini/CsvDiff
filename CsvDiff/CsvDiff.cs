@@ -25,12 +25,25 @@ namespace CsvDiff
                 right = right.ToUpperInvariant();
             }
 
+            if (diffOptions.AllowRowReordering)
+            {
+                left = Sort(left);
+                right = Sort(right);
+            }
+
             return Diff(left, right);
+        }
+
+        private string Sort(string input)
+        {
+            var rows = SplitIntoRows(input);
+            var ordered = rows.OrderBy(r => r);
+            return JoinRows(ordered);
         }
 
         private string Trim(string input)
         {
-            var rows = input.Split(new[] {@"\r\n"}, StringSplitOptions.None);
+            var rows = SplitIntoRows(input);
             IList<string> trimmedRows = new List<string>(rows.Length);
             foreach (var row in rows)
             {
@@ -38,7 +51,17 @@ namespace CsvDiff
                 trimmedRows.Add(string.Join(",", cols.Select(c => c.Trim())));
             }
 
-            return string.Join("\r\n", trimmedRows);
+            return JoinRows(trimmedRows);
+        }
+
+        private static string JoinRows(IEnumerable<string> trimmedRows)
+        {
+            return string.Join(@"\r\n", trimmedRows);
+        }
+
+        private static string[] SplitIntoRows(string input)
+        {
+            return input.Split(new[] {@"\r\n"}, StringSplitOptions.None);
         }
     }
 }
