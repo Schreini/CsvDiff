@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>0.0.1.0</Version>
+    <Description>A library to diff Csv Files</Description>
+    <PackageProjectUrl>https://github.com/Schreini/CsvDiff</PackageProjectUrl>
+    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Schreini/CsvDiff</RepositoryUrl>
+    <PackageTags>csv diff</PackageTags>
+    <PackageReleaseNotes>A library to diff Csv Files</PackageReleaseNotes>
+    <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
