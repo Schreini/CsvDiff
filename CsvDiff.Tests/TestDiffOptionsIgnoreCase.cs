@@ -11,7 +11,7 @@ namespace CsvDiff.Tests
             var left = @"Col1,Col2\r\nval1,Val2";
             var right = @"Col1,Col2\r\nVal1,val2";
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right);
@@ -28,7 +28,7 @@ namespace CsvDiff.Tests
             var right = @"Col1,Col2\r\nVal1,val2";
             var diffOptions = new DiffOptions {IgnoreCase = false};
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right, diffOptions);
@@ -45,7 +45,7 @@ namespace CsvDiff.Tests
             var right = @"Col1,Col2\r\nVal1,val2";
             var diffOptions = new DiffOptions {IgnoreCase = true};
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right, diffOptions);

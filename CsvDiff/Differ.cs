@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CsvDiff
 {
-    public class CsvDiff
+    public class Differ
     {
         public DiffResult Diff(string left, string right)
         {
@@ -47,7 +47,7 @@ namespace CsvDiff
             IList<string> trimmedRows = new List<string>(rows.Length);
             foreach (var row in rows)
             {
-                var cols = row.Split(new []{','}, StringSplitOptions.None);
+                var cols = row.Split(new[] {','}, StringSplitOptions.None);
                 trimmedRows.Add(string.Join(",", cols.Select(c => c.Trim())));
             }
 

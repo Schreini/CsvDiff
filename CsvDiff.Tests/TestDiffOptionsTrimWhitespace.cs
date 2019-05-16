@@ -12,7 +12,7 @@ namespace CsvDiff.Tests
             var right = @"ColName\r\n Value ";
             var diffOptions = new DiffOptions {TrimWhitespace = false};
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right, diffOptions);
@@ -29,7 +29,7 @@ namespace CsvDiff.Tests
             var right = @"ColName\r\n Value ";
             var diffOptions = new DiffOptions {TrimWhitespace = true};
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right, diffOptions);
@@ -46,7 +46,7 @@ namespace CsvDiff.Tests
             var right = @"ColName\r\nVa lue";
             var diffOptions = new DiffOptions {TrimWhitespace = true};
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right, diffOptions);
@@ -63,7 +63,7 @@ namespace CsvDiff.Tests
             var right = @"Col1,Col2\r\nVal1, Val2 ";
             var diffOptions = new DiffOptions {TrimWhitespace = true};
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right, diffOptions);
@@ -79,7 +79,7 @@ namespace CsvDiff.Tests
             var left = @"ColName\r\nValue";
             var right = @"ColName\r\n Value ";
 
-            var target = new CsvDiff();
+            var target = new Differ();
 
             //act
             var actual = target.Diff(left, right);
