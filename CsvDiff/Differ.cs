@@ -8,7 +8,7 @@ namespace CsvDiff
     {
         public DiffResult Diff(string left, string right)
         {
-            return new DiffResult(left == right);
+            return new DiffResult(left == right, null, null);
         }
 
         public DiffResult Diff(string left, string right, DiffOptions diffOptions)
