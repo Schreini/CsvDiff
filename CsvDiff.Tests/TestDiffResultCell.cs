@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
 namespace CsvDiff.Tests
 {
@@ -15,7 +12,7 @@ namespace CsvDiff.Tests
             var right = new DiffResultValues("a", "a");
 
             //Act
-            var target = new DiffResultCell(left, right, true);
+            var target = new DiffResultCell(left, right);
 
             //Assert
             Assert.Equal(left, target.Left);

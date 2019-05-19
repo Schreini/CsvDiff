@@ -4,14 +4,14 @@ namespace CsvDiff
 {
     public class DiffResult
     {
-        public DiffResult(bool match, IEnumerable<DiffResultRow> rows, IEnumerable<string> captions)
+        public DiffResult(bool match, IEnumerable<DiffResultRow> rows)
         {
             Match = match;
             Rows = rows;
-            Captions = captions;
+            //Captions = captions;
         }
 
-        public IEnumerable<string> Captions { get; }
+        //public IEnumerable<string> Captions { get; }
 
         public IEnumerable<DiffResultRow> Rows { get; }
 
