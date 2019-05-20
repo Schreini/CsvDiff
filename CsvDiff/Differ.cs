@@ -92,7 +92,15 @@ namespace CsvDiff
 
         private static string[] SplitIntoRows(string input)
         {
-            return input.Split(new[] {"\r\n"}, StringSplitOptions.None);
+            var result = input.Split(new[] {"\r\n"}, StringSplitOptions.None);
+            if (result[result.Length - 1].Trim() == string.Empty)
+            {
+                var newResult = new string[result.Length-1];
+                Array.Copy(result, newResult, newResult.Length);
+                result = newResult;
+            }
+
+            return result;
         }
     }
 }

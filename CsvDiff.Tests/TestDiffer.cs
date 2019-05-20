@@ -80,6 +80,20 @@ namespace CsvDiff.Tests
         }
 
         [Fact]
+        public void DiffShouldIgnoreEmptyRowAtTheEnd()
+        {
+            //Arrange
+            var emtyRowAtEnd = "colName\r\n";
+            var target = new Differ();
+
+            //Act
+            var actual = target.Diff(emtyRowAtEnd, emtyRowAtEnd);
+
+            //Assert
+            Assert.Single(actual.Rows);
+        }
+
+        [Fact]
         public void DiffShouldfillResultCellsWithMultiColumnAndMultiRows()
         {
             var colName1 = "ColName1";
