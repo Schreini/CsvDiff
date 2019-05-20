@@ -87,12 +87,12 @@ namespace CsvDiff
 
         private static string JoinRows(IEnumerable<string> trimmedRows)
         {
-            return string.Join(@"\r\n", trimmedRows);
+            return string.Join("\r\n", trimmedRows);
         }
 
         private static string[] SplitIntoRows(string input)
         {
-            return input.Split(new[] {@"\r\n"}, StringSplitOptions.None);
+            return input.Split(new[] {"\r\n"}, StringSplitOptions.None);
         }
     }
 }

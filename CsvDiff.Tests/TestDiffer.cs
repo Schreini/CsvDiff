@@ -10,8 +10,8 @@ namespace CsvDiff.Tests
         public void DiffWithOneDifferingColumn()
         {
             //arrange
-            var left = @"ColName\r\nLeft";
-            var right = @"ColName\r\nRight";
+            var left = "ColName\r\nLeft";
+            var right = "ColName\r\nRight";
 
             var target = new Differ();
 
@@ -26,7 +26,7 @@ namespace CsvDiff.Tests
         public void DiffWithOneMatchingColumn()
         {
             //arrange
-            var leftAndRight = @"ColName\r\nValue";
+            var leftAndRight = "ColName\r\nValue";
 
             var target = new Differ();
 
@@ -41,7 +41,7 @@ namespace CsvDiff.Tests
         public void DiffShouldThrowArgumentNullExceptionForLeft()
         {
             //Arrange
-            var right = @"ColName\r\nValue";
+            var right = "ColName\r\nValue";
             var target = new Differ();
 
             //Act & Assert
@@ -52,7 +52,7 @@ namespace CsvDiff.Tests
         public void DiffShouldThrowArgumentNullExceptionForRight()
         {
             //Arrange
-            var left = @"ColName\r\nValue";
+            var left = "ColName\r\nValue";
             var target = new Differ();
 
             //Act & Assert
@@ -63,8 +63,8 @@ namespace CsvDiff.Tests
         public void DiffShouldFillResultCells()
         {
             //Arrange
-            var colName = @"ColName";
-            var leftAndRight = $@"{colName}\r\nValue";
+            var colName = "ColName";
+            var leftAndRight = $"{colName}\r\nValue";
             var target = new Differ();
 
             //Act
@@ -82,11 +82,11 @@ namespace CsvDiff.Tests
         [Fact]
         public void DiffShouldfillResultCellsWithMultiColumnAndMultiRows()
         {
-            var colName1 = @"ColName1";
-            var colName2 = @"ColName2";
-            var colNames = $@"{colName1},{colName2}";
-            var left = $@"{colNames}\r\nValue1,Left2";
-            var right = $@"{colNames}\r\nValue1,Right2";
+            var colName1 = "ColName1";
+            var colName2 = "ColName2";
+            var colNames = $"{colName1},{colName2}";
+            var left = $"{colNames}\r\nValue1,Left2";
+            var right = $"{colNames}\r\nValue1,Right2";
             var target = new Differ();
 
             //Act
