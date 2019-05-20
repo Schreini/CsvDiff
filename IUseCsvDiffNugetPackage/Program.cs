@@ -8,7 +8,7 @@ namespace IUseCsvDiffNugetPackage
         {
             Console.WriteLine("Hello World!");
 
-            var differ = new CsvDiff.CsvDiff();
+            var differ = new CsvDiff.Differ();
 
             var result = differ.Diff("a", "a");
             Console.WriteLine(result);
