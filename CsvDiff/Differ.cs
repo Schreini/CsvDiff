@@ -13,6 +13,13 @@ namespace CsvDiff
 
             var leftStringRows = SplitIntoRows(left);
             var rightStringRows = SplitIntoRows(right);
+
+            if (leftStringRows.Length > rightStringRows.Length)
+                rightStringRows = AppendEmptyRows(rightStringRows, leftStringRows.Length);
+
+            if (rightStringRows.Length > leftStringRows.Length)
+                leftStringRows = AppendEmptyRows(leftStringRows, rightStringRows.Length);
+
             var resultRows = new List<DiffResultRow>();
 
             for (var row = 0; row < leftStringRows.Length; row++)
@@ -30,6 +37,17 @@ namespace CsvDiff
             }
 
             return new DiffResult(left == right, resultRows);
+        }
+
+        private string[] AppendEmptyRows(string[] rows, int length)
+        {
+            string[] result = new string[length];
+            Array.Copy(rows, result, rows.Length);
+
+            for(int i = rows.Length; i < length; i++)
+                result[i] = "";
+
+            return result;
         }
 
         public DiffResult Diff(string left, string right, DiffOptions diffOptions)

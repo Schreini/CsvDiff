@@ -135,5 +135,39 @@ namespace CsvDiff.Tests
             Assert.Equal("Right2", Right2.Right.Original);
             Assert.Equal("Right2", Right2.Right.Processed);
         }
+
+        [Fact]
+        public void DiffWhenLeftAreMoreRowsThenRightDifferShouldGenerateEmptyRow()
+        {
+            //Arrange
+            var left = "row1\r\nrow2";
+            var right = "row1";
+            var target = new Differ();
+
+            //Act
+            var actual = target.Diff(left, right);
+
+            //Assert
+            Assert.False(actual.Match);
+            Assert.Equal(2, actual.Rows.Count());
+            Assert.Equal("", actual.Rows.ElementAt(1).Cells.ElementAt(0).Right.Original);
+        }
+
+        [Fact]
+        public void DiffWhenRightAreMoreRowsThenLeftDifferShouldGenerateEmptyRow()
+        {
+            //Arrange
+            var left = "row1";
+            var right = "row1\r\nrow2";
+            var target = new Differ();
+
+            //Act
+            var actual = target.Diff(left, right);
+
+            //Assert
+            Assert.False(actual.Match);
+            Assert.Equal(2, actual.Rows.Count());
+            Assert.Equal("", actual.Rows.ElementAt(1).Cells.ElementAt(0).Left.Original);
+        }
     }
 }
