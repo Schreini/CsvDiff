@@ -20,19 +20,34 @@ namespace CsvDiff
             if (rightStringRows.Length > leftStringRows.Length)
                 leftStringRows = AppendEmptyRows(leftStringRows, rightStringRows.Length);
 
+            var leftCells = new string[leftStringRows.Length][];
+            var rightCells = new string[leftStringRows.Length][];
+
+            for (var row = 0; row < leftStringRows.Length; row++)
+            {
+                leftCells[row] = SplitIntoCells(leftStringRows[row]);
+                rightCells[row] = SplitIntoCells(rightStringRows[row]);
+            }
+
+            var maxLeftCells = leftCells.Select(r => r).ToList().Select(c => c.Length).Max(c => c);
+            var maxRightCells = rightCells.Select(r => r).ToList().Select(c => c.Length).Max(c => c);
+
+            var maxCells = Math.Max(maxLeftCells, maxRightCells);
+
             var resultRows = new List<DiffResultRow>();
 
             for (var row = 0; row < leftStringRows.Length; row++)
             {
-                var leftRow = SplitIntoCells(leftStringRows[row]);
-                var rightRow = SplitIntoCells(rightStringRows[row]);
+                leftCells[row] = AppendEmptyRows(leftCells[row], maxCells);
+                rightCells[row] = AppendEmptyRows(rightCells[row], maxCells);
+
                 var resultCells = new List<DiffResultCell>();
                 resultRows.Add(new DiffResultRow(resultCells));
 
-                for (var cell = 0; cell < leftRow.Length; cell++)
+                for (var cell = 0; cell < leftCells[row].Length; cell++)
                     resultCells.Add(new DiffResultCell(
-                        new DiffResultValues(leftRow[cell], leftRow[cell]),
-                        new DiffResultValues(rightRow[cell], rightRow[cell])
+                        new DiffResultValues(leftCells[row][cell], leftCells[row][cell]),
+                        new DiffResultValues(rightCells[row][cell], rightCells[row][cell])
                     ));
             }
 
