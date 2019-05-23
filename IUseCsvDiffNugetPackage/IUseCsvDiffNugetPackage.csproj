@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CsvDiff" Version="0.0.1-CI-20190519-211937" />
+    <ProjectReference Include="..\CsvDiff\CsvDiff.csproj" />
   </ItemGroup>
 
 </Project>

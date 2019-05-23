@@ -6,6 +6,7 @@ namespace CsvDiff
 {
     public class Differ
     {
+        private static string _newline = Environment.NewLine;
         public DiffResult Diff(string left, string right)
         {
             if (left == null) throw new ArgumentNullException(nameof(left));
@@ -120,12 +121,12 @@ namespace CsvDiff
 
         private static string JoinRows(IEnumerable<string> trimmedRows)
         {
-            return string.Join("\r\n", trimmedRows);
+            return string.Join(_newline, trimmedRows);
         }
 
         private static string[] SplitIntoRows(string input)
         {
-            var result = input.Split(new[] {"\r\n"}, StringSplitOptions.None);
+            var result = input.Split(new[] {_newline}, StringSplitOptions.None);
             if (result[result.Length - 1].Trim() == string.Empty)
             {
                 var newResult = new string[result.Length-1];

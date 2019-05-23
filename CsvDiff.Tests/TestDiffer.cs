@@ -6,12 +6,13 @@ namespace CsvDiff.Tests
 {
     public class TestDiffer
     {
+        public static string CrLf = Environment.NewLine;
         [Fact]
         public void DiffWithOneDifferingColumn()
         {
             //arrange
-            var left = "ColName\r\nLeft";
-            var right = "ColName\r\nRight";
+            var left = $"ColName{CrLf}Left";
+            var right = $"ColName{CrLf}Right";
 
             var target = new Differ();
 
@@ -26,7 +27,7 @@ namespace CsvDiff.Tests
         public void DiffWithOneMatchingColumn()
         {
             //arrange
-            var leftAndRight = "ColName\r\nValue";
+            var leftAndRight =$"ColName{CrLf}Value";
 
             var target = new Differ();
 
@@ -41,7 +42,7 @@ namespace CsvDiff.Tests
         public void DiffShouldThrowArgumentNullExceptionForLeft()
         {
             //Arrange
-            var right = "ColName\r\nValue";
+            var right = $"ColName{CrLf}Value";
             var target = new Differ();
 
             //Act & Assert
@@ -52,7 +53,7 @@ namespace CsvDiff.Tests
         public void DiffShouldThrowArgumentNullExceptionForRight()
         {
             //Arrange
-            var left = "ColName\r\nValue";
+            var left = $"ColName{CrLf}Value";
             var target = new Differ();
 
             //Act & Assert
@@ -64,7 +65,7 @@ namespace CsvDiff.Tests
         {
             //Arrange
             var colName = "ColName";
-            var leftAndRight = $"{colName}\r\nValue";
+            var leftAndRight = $"{colName}{CrLf}Value";
             var target = new Differ();
 
             //Act
@@ -83,7 +84,7 @@ namespace CsvDiff.Tests
         public void DiffShouldIgnoreEmptyRowAtTheEnd()
         {
             //Arrange
-            var emtyRowAtEnd = "colName\r\n";
+            var emtyRowAtEnd = $"colName{CrLf}";
             var target = new Differ();
 
             //Act
@@ -99,8 +100,8 @@ namespace CsvDiff.Tests
             var colName1 = "ColName1";
             var colName2 = "ColName2";
             var colNames = $"{colName1},{colName2}";
-            var left = $"{colNames}\r\nValue1,Left2";
-            var right = $"{colNames}\r\nValue1,Right2";
+            var left = $"{colNames}{CrLf}Value1,Left2";
+            var right = $"{colNames}{CrLf}Value1,Right2";
             var target = new Differ();
 
             //Act
@@ -128,19 +129,19 @@ namespace CsvDiff.Tests
             Assert.Equal("Value1", value1.Right.Original);
             Assert.Equal("Value1", value1.Right.Processed);
 
-            var Right2 = actual.Rows.ElementAt(1).Cells.ElementAt(1);
-            Assert.False(Right2.IsMatch);
-            Assert.Equal("Left2", Right2.Left.Original);
-            Assert.Equal("Left2", Right2.Left.Processed);
-            Assert.Equal("Right2", Right2.Right.Original);
-            Assert.Equal("Right2", Right2.Right.Processed);
+            var right2 = actual.Rows.ElementAt(1).Cells.ElementAt(1);
+            Assert.False(right2.IsMatch);
+            Assert.Equal("Left2", right2.Left.Original);
+            Assert.Equal("Left2", right2.Left.Processed);
+            Assert.Equal("Right2", right2.Right.Original);
+            Assert.Equal("Right2", right2.Right.Processed);
         }
 
         [Fact]
         public void DiffWhenLeftAreMoreRowsThenRightDifferShouldGenerateEmptyRow()
         {
             //Arrange
-            var left = "row1\r\nrow2";
+            var left = $"row1{CrLf}row2";
             var right = "row1";
             var target = new Differ();
 
@@ -158,7 +159,7 @@ namespace CsvDiff.Tests
         {
             //Arrange
             var left = "row1";
-            var right = "row1\r\nrow2";
+            var right = $"row1{CrLf}row2";
             var target = new Differ();
 
             //Act
@@ -174,8 +175,8 @@ namespace CsvDiff.Tests
         public void DiffWhenLeftAreMoreCellsThenRightDifferShouldGenerateEmptyCells()
         {
             //Arrange
-            var left = "\r\n";
-            var right = "c1,c2\r\nc1,c2,c3";
+            var left = CrLf;
+            var right = $"c1,c2{CrLf}c1,c2,c3";
             var target = new Differ();
 
             //Act
